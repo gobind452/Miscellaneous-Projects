@@ -1,0 +1,59 @@
+<!-- Template Code 
+Dont pay attention to the front end and css etc-->
+<!doctype html>
+<html>
+<head>
+	<title>Query Results</title>
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"> <!-- No change required here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('home')}}"> Home </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('search')}}">Search Engine </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('country')}}">Country Wise </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('prompt',page = 'add')}}">Create Player </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <br>
+	<h2> Results of the search are - </h2>
+	  <table class = "table table-dark" border = 1>
+		<thead>
+      		<tr>
+      			<th scope="col"> Id </th>
+      			<th scope="col"> Name </th>
+            <th scope="col"> Country </th>
+      		</tr>
+      	</thead>
+  		<tbody>
+         {% for e in result %} <!-- Main part. Uses the result given to this code to render the webpage-->
+            <tr>
+               <td> {{ e[0] }} </td> <!-- Similar to python syntax. For more templating syntax, search for Jinja2 templating-->
+               <td> {{ e[1] }} </td>
+               <td> {{ e[2] }} </td>
+               <td> <button name="redirect" onClick="player('{{e[0]}}')" value="Full Statistics"> Full Statistics </button> </td>
+
+            </tr>
+         {% endfor %}
+     	</tbody>
+      </table>
+      <script type="text/javascript">
+        function player(id){
+          var url = "http://localhost:5000/player/"+id
+          window.location = url
+        }
+      </script>
+    </div>
+   </body>
+</html>

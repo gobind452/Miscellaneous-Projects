@@ -1,0 +1,145 @@
+<!doctype html>
+<html>
+<head>
+	<title> Player Stats </title>
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"> <!-- No change required here -->
+</head>
+<body>
+  <script type="text/javascript">
+    function redirect(page,id) {
+      toPass = page.toString()+"_"+id.toString()
+      window.location.href = "http://localhost:5000/prompt/"+toPass
+    }
+  </script>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('home')}}">Home </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('search')}}">Search Engine </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('country')}}">Country Wise </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('prompt',page = 'add')}}">Create Player </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+	<div class="container">
+		<br>
+		<h1> {{ name }} </h1>
+		<br>
+		<h2> {{ country }} </h2>
+		<br>
+    <h3> Id : {{ Id }} </h3>
+    <br>
+		<h2> Full Statistics </h2>
+    <br>
+    <button type="button" onclick="redirect('update','{{Id}}')"> Update Statistics </button>
+    <br>
+    <button type="button" onclick="redirect('delete','{{Id}}')"> Delete Player </button>
+    <br>
+		<div class="row">
+			<div class="col-4"> Test  </div>
+			<div class="col-4"> ODI </div>
+    	<div class="col-4"> T20 </div>
+		</div>
+	<div class="row">
+		<div class="col-4">
+      {% for e in result_test.keys() %}
+      {{ e|title }} 
+		<table class="table table-dark" border = 1>
+		<thead>
+      		<tr>
+      			<th scope="col"> Parameter </th>
+      			<th scope="col"> Value </th>
+      		</tr>
+      	</thead>
+  		<tbody>
+        {% for column in result_test[e].keys()%}
+            <tr>
+               <td> {{ column|title }}</td>
+               <td> {{ result_test[e][column] }} </td> 
+            </tr>
+         {% endfor %}
+     	</tbody>
+      </table>
+      {% endfor %}
+  </div>
+  <div class="col-4">
+      {% for e in result_odi.keys() %}
+      {{ e|title }} 
+    <table class="table table-dark" border = 1>
+    <thead>
+          <tr>
+            <th scope="col"> Parameter </th>
+            <th scope="col"> Value </th>
+          </tr>
+        </thead>
+      <tbody>
+        {% for column in result_odi[e].keys()%}
+            <tr>
+               <td> {{ column|title}} </td>
+               <td> {{ result_odi[e][column] }} </td> 
+            </tr>
+         {% endfor %}
+      </tbody>
+      </table>
+      {% endfor %}
+  </div>
+  <div class="col-4">
+      {% for e in result_t20.keys() %}
+      {{ e|title }} 
+    <table class="table table-dark" border = 1>
+    <thead>
+          <tr>
+            <th scope="col"> Parameter </th>
+            <th scope="col"> Value </th>
+          </tr>
+        </thead>
+      <tbody>
+        {% for column in result_t20[e].keys()%}
+            <tr>
+               <td> {{ column|title}} </td>
+               <td> {{ result_t20[e][column] }} </td> 
+            </tr>
+         {% endfor %}
+      </tbody>
+      </table>
+      {% endfor %}
+  </div>
+</div>
+<div class="row"> 
+  <h2> Similar Players - </h2>
+    <table class = "table" border = 1>
+    <thead>
+          <tr>
+            <th scope="col"> Name </th>
+            <th scope="col"> Id </th>
+            <th scope="col"> Full Statistics </th>
+          </tr>
+        </thead>
+      <tbody>
+         {% for e in similar_players %} <!-- Main part. Uses the result given to this code to render the webpage-->
+            <tr>
+               <td> {{ e[0] }} </td> <!-- Similar to python syntax. For more templating syntax, search for Jinja2 templating-->
+               <td> {{ e[1] }} </td>
+               <td> <button name="redirect" onClick="player('{{e[1]}}')" value="Full Statistics"> Full Statistics </button> </td>
+            </tr>
+         {% endfor %}
+      </tbody>
+      </table>
+      <script type="text/javascript">
+        function player(id){
+          var url = "http://localhost:5000/player/"+id
+          window.location = url
+        }
+      </script>
+</div>
+</div>
+</body>
+</html>

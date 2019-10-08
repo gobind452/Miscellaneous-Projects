@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Search Page </title>
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"> <!-- Setting CSS-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+	<script type="text/javascript">
+		window.onload=function(){
+			var page = "{{page}}";
+			page = page.split("_");
+			url = "http://localhost:5000/";
+			for (var i =0;i<page.length;i++){
+				url = url + page[i]
+				if (i<page.length-1){
+					url = url + "/"
+				}
+			}
+			window.location=prompt('Enter Password')!='col362'?'{{url_for("reset",message = "Incorrect Password")}}':url
+		}
+	</script>
+</body>
+</html>

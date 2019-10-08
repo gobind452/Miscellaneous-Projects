@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Home Page </title>
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"> <!-- Setting CSS-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('home')}}"> Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('search')}}">Search Engine </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('country')}}">Country Wise </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('prompt',page = 'add')}}">Create Player </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+	<h1> Country Wise Statistics </h1>
+	<form action="http://localhost:5000/country" method="get">
+		Country
+		<input type="text" name="country" placeholder="Country">
+		<br>
+		Format
+		<select name="game">
+		  <option value="test">Test</option>
+		  <option value="odi">ODI</option>
+		  <option value="t20">T20</option>
+		</select>
+		<br>
+		<input type="submit" value="Submit">
+	</form>
+</div>
+</body>
+</html>

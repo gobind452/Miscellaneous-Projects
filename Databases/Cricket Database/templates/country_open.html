@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Home Page </title>
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"> <!-- Setting CSS-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+       <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('home')}}"> Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('search')}}">Search Engine </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('country')}}">Country Wise </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('prompt',page = 'add')}}">Create Player </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+	<div class="container">
+		<h1> Country Wise Statistics </h1>
+		<br>
+		<h2> {{ country }} </h2>
+		<br>
+		<h2> {{ game|title }} </h2>
+    <br>
+		<table class="table table-dark" border = 1>
+		<thead>
+      		<tr>
+      			<th scope="col"> Statistic </th>
+      			<th scope="col"> Player Name </th>
+      			<th scope="col"> Value </th>
+      		</tr>
+      	</thead>
+  		<tbody>
+         {% for stat in result.keys() %} 
+            <tr>
+               <td> {{ stat }} </td>
+               <td> {{ result[stat][0] }} </td>
+               <td> {{ result[stat][1] }} </td> 
+            </tr>
+         {% endfor %}
+     	</tbody>
+      </table>
+      <h2> Top Batsman </h2>
+      <br>
+       <table class="table table-dark" border = 1>
+    <thead>
+          <tr>
+            <th scope="col"> Name </th>
+            <th scope="col"> Runs </th>
+            <th scope="col"> Innings </th>
+            <th scope="col"> Average </th>
+            <th scope="col"> Fifties </th>
+            <th scope="col"> Hundreds </th>
+          </tr>
+        </thead>
+      <tbody>
+         {% for e in bat %} 
+          <tr>
+            {% for value in e%}
+            <td> {{value}} </td>
+         {% endfor %}
+          </tr>
+          {% endfor %}
+      </tbody>
+      </table>
+      <br>
+      <h2> Top Bowlers </h2>
+      <br>
+       <table class="table table-dark" border = 1>
+    <thead>
+          <tr>
+            <th scope="col"> Name </th>
+            <th scope="col"> Wickets </th>
+            <th scope="col"> Innings </th>
+            <th scope="col"> Average </th>
+          </tr>
+        </thead>
+      <tbody>
+         {% for e in ball %} 
+          <tr>
+            {% for value in e%}
+            <td> {{value}} </td>
+         {% endfor %}
+          </tr>
+          {% endfor %}
+      </tbody>
+      </table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Insert Page </title>
+	<link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet"> <!-- Setting CSS-->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    	 <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('home')}}"> Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('search')}}">Search Engine </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('country')}}">Country Wise </a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('add')}}">Create Player </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+	<div class="container">
+		<div class="row">
+			<div class="col-4">
+				<h1> Name : {{name}} </h1>
+			</div>
+			<div class="col-4">
+				<h1> Country : {{country}} </h1>
+			</div>
+			<div class="col-4">
+				<h1> Id : {{Id}} </h1>
+			</div>
+		</div>
+		<h2> Enter player details </h2>
+		<form action="http://localhost:5000/added/{{Id}}/{{name}}/{{country}}" method="post">
+		<div class="row">
+				<div class="col">TEST 
+						<div class="col">
+							Career Start
+							<input type="number" name="test_career/career_start">
+						</div>
+						<div class="col">
+							Career End 
+							<input type="number" name="test_career/career_end"> 
+						</div>
+						<div class="col">
+							Matches 
+							<input type="number" name="test_career/matches">
+						</div>	
+				</div>		
+
+
+				<div class="col">ODI 
+
+						<div class="col">
+							Career Start
+							<input type="number" min="0" name="odi_career/career_start">
+						</div>
+						<div class="col">
+							Career End 
+							<input type="number" min="0" name="odi_career/career_end"> 
+						</div>
+						<div class="col">
+							Matches 
+							<input type="number" min="1" name="odi_career/matches">
+						</div>	
+				</div>
+
+
+
+				<div class="col">T20 
+
+						<div class="col">
+							Career Start
+							<input type="number" min="0" name="t20_career/career_start">
+						</div>
+						<div class="col">
+							Career End 
+							<input type="number" min="0" name="t20_career/career_end"> 
+						</div>
+						<div class="col">
+							Matches 
+							<input type="number" min="1" name="t20_career/matches">
+						</div>	
+				</div>						
+			</div>
+
+
+			<div class="row"> <!--Batting Row  -->
+
+				<div class="col"> <!--Test  -->
+					<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#test_bat">Test Batting</button>	
+
+					<div id=test_bat class="collapse">BATTING
+								<div class="col">
+									Innings
+									<input type="number" min="1" name="test_bat/innings">
+								</div>
+								<div class="col">
+									Runs
+									<input type="number" min="0" name="test_bat/runs">	
+								</div>
+								<div class="col">
+									Hundreds
+									<input type="number" min="0" name="test_bat/hundreds">
+								</div>
+
+								<div class="col">
+									Fifties
+									<input type="number" min="0" name="test_bat/fifties">
+								</div>
+
+								<div class="col">
+									Average
+									<input type="number" min="0" step="0.01" name="test_bat/average">
+								</div>
+
+								<div class="col">
+									Highest Score
+									<input type="number" min="0" name="test_bat/highest_score">
+								</div>
+
+								<div class="col">
+									Not Outs
+									<input type="number" min="0" name="test_bat/not_outs">
+								</div>
+
+								<div class="col">		
+									Ducks
+									<input type="number" min="0" name="test_bat/ducks">
+								</div>	
+					</div>
+				</div>
+
+				<div class="col"> <!--ODI  -->
+					<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#odi_bat">ODI Batting</button>	
+
+					<div id=odi_bat class="collapse">BATTING
+
+							<div class="row">
+								Innings
+								<input type="number" min="1" name="odi_bat/innings">	
+							</div>
+							<div class="row">
+								Not Outs
+								<input type="number" min="0" name="odi_bat/not_outs">
+							</div>
+							<div class="row">
+								Runs
+								<input type="number" min="0" name="odi_bat/runs">
+							</div>
+							<div class="row">
+								Highest Score
+								<input type="number" min="0" name="odi_bat/highest_score">
+							</div>
+							<div class="row">
+								Average
+								<input type="number" min="0" step="0.01" name="odi_bat/average">
+							</div>
+							<div class="row">
+								Hundreds
+								<input type="number" min="0" name="odi_bat/hundreds">
+							</div>
+							<div class="row">
+								Fifties
+								<input type="number" min="0" name="odi_bat/fifties">
+							</div>
+							<div class="row">
+								Ducks
+								<input type="number" min="0" name="odi_bat/ducks">
+							</div>
+					</div>
+				</div>
+
+				<div class="col"> <!--T20  -->
+					<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#t20_bat">T20 Batting</button>	
+
+					<div id=t20_bat class="collapse">BATTING
+
+							<div class="row">
+								Innings
+								<input type="number" min="1" name="t20_bat/innings">
+							</div>
+							<div class="row">
+								Not Outs
+								<input type="number" min="0" name="t20_bat/not_outs">
+							</div>
+							<div class="row">
+								Runs
+								<input type="number" min="0" name="t20_bat/runs">
+							</div>
+							<div class="row">
+								Highest Score
+								<input type="number" min="0" name="t20_bat/highest_score">
+							</div>
+							<div class="row">
+								Average
+								<input type="number" min="0" step="0.01" name="t20_bat/average">
+							</div>
+							<div class="row">
+								Hundreds
+								<input type="number" min="0" name="t20_bat/hundreds">
+							</div>
+							<div class="row">
+								Fifties
+								<input type="number" min="0" name="t20_bat/fifties">
+							</div>
+							<div class="row">
+								Ducks
+								<input type="number" min="0" name="t20_bat/ducks">
+							</div>
+							<div class="row">
+								Fours 
+								<input type="number" min="0" name="t20_bat/fours">
+							</div>
+							<div class="row">
+								Sixes
+								<input type="number" min="0" name="t20_bat/sixes">
+							</div>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="row"> <!--Balling Row  -->
+
+				<div class="col"> <!--Test  -->
+					<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#test_ball">Test Balling</button>
+
+					<div id=test_ball class="collapse">BOWLING
+
+							<div class="col">
+								Innings
+								<input type="number" min="1" name="test_ball/innings">
+							</div>
+							<div class="col">
+								Balls Bowled
+								<input type="number" min="1" name="test_ball/balls_bowled">
+							</div>
+							<div class="col">
+								Runs Conceded
+								<input type="number" min="0" name="test_ball/runs_conceded">
+							</div>
+							<div class="col">
+								Wickets
+								<input type="number" min="0" name="test_ball/wickets">
+							</div>
+							<div class="col">
+								Average
+								<input type="number" min="0" step="0.01" name="test_ball/bowling_avg">
+							</div>
+							<div class="col">
+								Economy 
+								<input type="number" min="0" step="0.01" name="test_ball/economy_rate">
+							</div>
+							<div class="col">
+								Strike Rate
+								<input type="number" min="0" step="0.01" name="test_ball/bowling_sr">
+							</div>
+							<div class="col">
+								Five Wickets or More Count
+								<input type="number" min="0" name="test_ball/five_wickets">
+							</div>
+							<div class="col">
+								Ten Wickets or More Count
+								<input type="number" min="0" name="test_ball/ten_wickets">
+							</div>
+					</div>
+
+				</div>
+
+
+
+				<div class="col"> <!--ODI  -->
+					<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#odi_ball">ODI Balling</button>
+
+					<div id=odi_ball class="collapse">BOWLING
+
+							<div class="row">
+								Innings
+								<input type="number" min="1" name="odi_ball/innings">
+							</div>
+							<div class="row">
+								Balls Bowled
+								<input type="number" min="1" name="odi_ball/balls_bowled">
+							</div>
+							<div class="row">
+								Runs Conceded
+								<input type="number" min="0" name="odi_ball/runs_conceded">
+							</div>
+							<div class="row">
+								Wickets
+								<input type="number" min="0" name="odi_ball/wickets">
+							</div>
+							<div class="row">
+								Average
+								<input type="number" min="0" step="0.01" name="odi_ball/bowling_avg">
+							</div>
+							<div class="row">
+								Economy 
+								<input type="number" min="0" step="0.01" name="odi_ball/economy_rate">
+							</div>
+							<div class="row">
+								Strike Rate
+								<input type="number" min="0" step="0.01" name="odi_ball/bowling_sr">
+							</div>
+							<div class="row">
+								Four Wickets or More Count
+								<input type="number" min="0" name="odi_ball/four_wickets">
+							</div>
+							<div class="row">	Five Wickets or More Count
+								<input type="number" min="0" name="odi_ball/five_wickets">
+							</div>	
+					</div>
+					
+				</div>
+
+
+				<div class="col"> <!--T20  -->
+					<button type="button" class="btn btn-info" data-toggle="collapse" data-target="#t20_ball">T20 Balling</button>
+
+					<div id=t20_ball class="collapse">BOWLING
+
+							<div class="row">
+								Innings
+								<input type="number" min="1" name="t20_ball/innings">
+							</div>
+							<div class="row">
+								Balls Bowled
+								<input type="number" min="1" name="t20_ball/balls_bowled">
+							</div>
+							<div class="row">
+								Runs Conceded
+								<input type="number" min="0" name="t20_ball/runs_conceded">
+							</div>
+							<div class="row">
+								Wickets
+								<input type="number" min="0" name="t20_ball/wickets">
+							</div>
+							<div class="row">
+								Average
+								<input type="number" min="0" step="0.01" name="t20_ball/bowling_avg">
+							</div>
+							<div class="row">
+								Economy 
+								<input type="number" min="0" step="0.01" name="t20_ball/economy_rate">
+							</div>
+							<div class="row">
+								Strike Rate
+								<input type="number" min="0" step="0.01" name="t20_ball/bowling_sr">
+							</div>
+							<div class="row">
+								Four Wickets or More Count
+								<input type="number" min="0" name="t20_ball/four_wickets">
+							</div>
+							<div class="row">
+								Five Wickets or More Count
+								<input type="number" min="0" name="t20_ball/five_wickets">
+							</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<input type="submit" value="Submit">		
+				</div>
+			</div>
+	</div>
+	</form>
+</body>
+</html>	
