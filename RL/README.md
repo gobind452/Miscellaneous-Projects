@@ -1,3 +1,7 @@
-## A reinforcement learning agent for the dino game in chrome
+## A deep reinforcement learning agent for the dino game in chrome
 
-### Algorihtms used - Policy Gradient and Actor-Critic
+### Algorithms used - Policy Gradient and Actor-Critic
+
+#### Schematics
+Main.py - Game Engine
+Try.py - Reinforcement Learning Agent 
