@@ -181,7 +181,7 @@ class SendingThread(Thread):
 
 	def chatWithPerson(self,username,message):
 		if mode == 0:
-			data = "SEND "+username+"\n\n"
+			data = "SEND "+username+"\nContent-length : "+str(len(message))+"\n\n"
 		if mode == 1 or mode == 2:
 			key = self.fetchKey(username)
 			if key == None:
